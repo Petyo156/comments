@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.3.1</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<modules>
+		<module>api</module>
+		<module>core</module>
+		<module>domain</module>
+		<module>persistence</module>
+		<module>rest</module>
+	</modules>
+
+	<groupId>tinqinacademy</groupId>
+	<artifactId>comments</artifactId>
+	<version>${revision}</version>
+	<name>comments</name>
+	<description>Comments project</description>
+
+	<packaging>pom</packaging>
+
+	<properties>
+		<java.version>21</java.version>
+		<revision>0.0.1-SNAPSHOT</revision>
+		<swagger.version>2.6.0</swagger.version>
+		<jakarta.version>3.1.0</jakarta.version>
+		<jackson.data.format.version>2.17.2</jackson.data.format.version>
+		<flatten.maven.version>1.2.7</flatten.maven.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+			<version>${jackson.data.format.version}</version>
+		</dependency>
+
+<!--		databases-->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.7.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.7.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>${flatten.maven.version}</version> <!-- Use the latest version -->
+				<executions>
+					<execution>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+						<phase>process-resources</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- Optional configurations -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
