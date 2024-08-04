@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.tinqinacademy.comments")
-@EntityScan(basePackages = "com.tinqinacademy.comments.persistance.entities")
-@EnableJpaRepositories(basePackages = "com.tinqinacademy.comments.persistance.repositories")
+@EntityScan(basePackages = "com.tinqinacademy.comments.persistence.entities")
+@EnableJpaRepositories(basePackages = "com.tinqinacademy.comments.persistence.repositories")
 public class Main {
 
     public static void main(String[] args) {

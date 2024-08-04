@@ -24,6 +24,12 @@
             <artifactId>jakarta.validation-api</artifactId>
             <version>${jakarta.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.vavr</groupId>
+            <artifactId>vavr</artifactId>
+            <version>0.10.4</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 
