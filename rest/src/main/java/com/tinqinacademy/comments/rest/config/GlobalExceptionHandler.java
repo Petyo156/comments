@@ -1,4 +1,4 @@
-package com.tinqinacademy.comments.rest;
+package com.tinqinacademy.comments.rest.config;
 
 import com.tinqinacademy.comments.api.models.exceptionhandling.ErrorResponse;
 import com.tinqinacademy.comments.api.models.exceptionhandling.ErrorWrapper;
