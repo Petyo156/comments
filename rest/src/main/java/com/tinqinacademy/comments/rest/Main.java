@@ -12,9 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = "com.tinqinacademy.comments.persistence.entities")
 @EnableJpaRepositories(basePackages = "com.tinqinacademy.comments.persistence.repositories")
 public class Main {
-
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
-
 }

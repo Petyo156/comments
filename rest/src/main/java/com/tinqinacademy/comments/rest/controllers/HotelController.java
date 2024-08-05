@@ -10,7 +10,6 @@ import com.tinqinacademy.comments.api.operations.hotel.usereditowncomment.UserEd
 import com.tinqinacademy.comments.core.processors.hotel.GetCommentsForRoomOperationProcessor;
 import com.tinqinacademy.comments.core.processors.hotel.LeaveCommentForRoomOperationProcessor;
 import com.tinqinacademy.comments.core.processors.hotel.UserEditOwnCommentOperationProcessor;
-import com.tinqinacademy.comments.core.services.HotelService;
 import com.tinqinacademy.comments.rest.config.RestApiMapping;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,6 @@ public class HotelController extends BaseController {
                 .roomId(roomId)
                 .build();
 
-        //return new ResponseEntity<>(hotelService.getCommentsForRoom(input1), HttpStatus.OK);
         return handleOperation(getCommentsForRoomOperationProcessor.process(input1), HttpStatus.BAD_REQUEST);
     }
 
@@ -59,7 +57,6 @@ public class HotelController extends BaseController {
                 .roomId(roomId)
                 .build();
 
-        //return new ResponseEntity<>(hotelService.leaveCommentForRoom(input1), HttpStatus.OK);
         return handleOperation(leaveCommentForRoomOperationProcessor.process(input1), HttpStatus.BAD_REQUEST);
     }
 
@@ -72,7 +69,6 @@ public class HotelController extends BaseController {
                 .commentId(commentId)
                 .build();
 
-        //return new ResponseEntity<>(hotelService.userCanEditOwnComment(input1), HttpStatus.OK);
         return handleOperation(userEditOwnCommentOperationProcessor.process(input1), HttpStatus.BAD_REQUEST);
     }
 

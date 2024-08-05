@@ -7,7 +7,6 @@ import com.tinqinacademy.comments.api.operations.system.admineditanycomment.Admi
 import com.tinqinacademy.comments.api.operations.system.admineditanycomment.AdminEditAnyCommentOutput;
 import com.tinqinacademy.comments.core.processors.service.AdminDeleteAnyCommentOperationProcessor;
 import com.tinqinacademy.comments.core.processors.service.AdminEditAnyCommentOperationProcessor;
-import com.tinqinacademy.comments.core.services.SystemService;
 import com.tinqinacademy.comments.rest.config.RestApiMapping;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,6 @@ public class SystemController extends BaseController {
                 .commentId(commentId)
                 .build();
 
-        //return new ResponseEntity<>(systemService.adminEditAnyComment(input1), HttpStatus.OK);
         return handleOperation(adminEditAnyCommentOperationProcessor.process(input1), HttpStatus.BAD_REQUEST);
     }
 
@@ -54,7 +52,6 @@ public class SystemController extends BaseController {
                 .commentId(commentId)
                 .build();
 
-        //return new ResponseEntity<>(systemService.adminDeleteAnyComment(input1), HttpStatus.OK);
         return handleOperation(adminDeleteAnyCommentOperationProcessor.process(input1), HttpStatus.BAD_REQUEST);
     }
 }
