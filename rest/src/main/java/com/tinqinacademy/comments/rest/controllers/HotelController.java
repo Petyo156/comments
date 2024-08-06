@@ -1,16 +1,13 @@
 package com.tinqinacademy.comments.rest.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tinqinacademy.comments.api.apimapping.RestApiMapping;
 import com.tinqinacademy.comments.api.operations.hotel.getcommentsforroom.GetCommentsForRoomInput;
-import com.tinqinacademy.comments.api.operations.hotel.getcommentsforroom.GetCommentsForRoomListOutput;
 import com.tinqinacademy.comments.api.operations.hotel.leavecommentforroom.LeaveCommentForRoomInput;
-import com.tinqinacademy.comments.api.operations.hotel.leavecommentforroom.LeaveCommentForRoomOutput;
 import com.tinqinacademy.comments.api.operations.hotel.usereditowncomment.UserEditOwnCommentInput;
-import com.tinqinacademy.comments.api.operations.hotel.usereditowncomment.UserEditOwnCommentOutput;
 import com.tinqinacademy.comments.core.processors.hotel.GetCommentsForRoomOperationProcessor;
 import com.tinqinacademy.comments.core.processors.hotel.LeaveCommentForRoomOperationProcessor;
 import com.tinqinacademy.comments.core.processors.hotel.UserEditOwnCommentOperationProcessor;
-import com.tinqinacademy.comments.rest.config.RestApiMapping;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

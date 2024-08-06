@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>tinqinacademy</groupId>
+        <groupId>com.tinqinacademy.comments</groupId>
         <artifactId>comments</artifactId>
         <version>${revision}</version>
     </parent>
@@ -17,7 +17,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>tinqinacademy</groupId>
+            <groupId>com.tinqinacademy.comments</groupId>
             <artifactId>core</artifactId>
             <version>${revision}</version>
             <scope>compile</scope>

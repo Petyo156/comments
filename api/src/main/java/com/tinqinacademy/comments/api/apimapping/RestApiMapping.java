@@ -1,4 +1,4 @@
-package com.tinqinacademy.comments.rest.config;
+package com.tinqinacademy.comments.api.apimapping;
 
 public class RestApiMapping {
     //hotel

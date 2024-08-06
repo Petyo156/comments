@@ -1,13 +1,11 @@
 package com.tinqinacademy.comments.rest.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tinqinacademy.comments.api.apimapping.RestApiMapping;
 import com.tinqinacademy.comments.api.operations.system.admindeleteanycomment.AdminDeleteAnyCommentInput;
-import com.tinqinacademy.comments.api.operations.system.admindeleteanycomment.AdminDeleteAnyCommentOutput;
 import com.tinqinacademy.comments.api.operations.system.admineditanycomment.AdminEditAnyCommentInput;
-import com.tinqinacademy.comments.api.operations.system.admineditanycomment.AdminEditAnyCommentOutput;
 import com.tinqinacademy.comments.core.processors.service.AdminDeleteAnyCommentOperationProcessor;
 import com.tinqinacademy.comments.core.processors.service.AdminEditAnyCommentOperationProcessor;
-import com.tinqinacademy.comments.rest.config.RestApiMapping;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
