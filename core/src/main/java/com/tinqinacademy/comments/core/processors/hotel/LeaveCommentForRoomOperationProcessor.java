@@ -50,10 +50,10 @@ public class LeaveCommentForRoomOperationProcessor extends BaseOperationProcesso
                     Comment comment = conversionService.convert(input, Comment.CommentBuilder.class)
                             .build();
 
-                    commentsRepository.save(comment);
+                    Comment save = commentsRepository.save(comment);
 
                     LeaveCommentForRoomOutput output = LeaveCommentForRoomOutput.builder()
-                            .id(String.valueOf(comment.getCommentId()))
+                            .id(String.valueOf(save.getCommentId()))
                             .build();
 
                     log.info("End leaveCommentForRoom output: {}", output);
