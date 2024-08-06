@@ -1,9 +1,7 @@
 package com.tinqinacademy.comments.api.operations.hotel.leavecommentforroom;
 
 import com.tinqinacademy.comments.api.base.OperationInput;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @NoArgsConstructor
@@ -14,6 +12,7 @@ import lombok.*;
 @ToString
 public class LeaveCommentForRoomInput implements OperationInput {
     @NotBlank(message = "roomId can not be blank")
+
     private String roomId;
     @NotBlank(message = "firstName can not be blank")
     private String firstName;

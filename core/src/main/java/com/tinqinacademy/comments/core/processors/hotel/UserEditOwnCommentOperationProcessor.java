@@ -57,10 +57,10 @@ public class UserEditOwnCommentOperationProcessor extends BaseOperationProcessor
                             .lastEditDate(LocalDate.now())
                             .build();
 
-                    commentsRepository.save(comment);
+                    Comment save = commentsRepository.save(comment);
 
                     UserEditOwnCommentOutput output = UserEditOwnCommentOutput.builder()
-                            .id(String.valueOf(comment.getCommentId()))
+                            .id(String.valueOf(save.getCommentId()))
                             .build();
 
                     log.info("End userCanEditOwnComment output: {}", output);
