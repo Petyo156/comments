@@ -1,6 +1,6 @@
 package com.tinqinacademy.comments.api.apimapping;
 
-public class RestApiMapping {
+public class RestApiMappingComments {
     //hotel
     public static final String GET_PATH = "/hotel/{roomId}/comment";
     public static final String POST_PATH = "/hotel/{roomId}/comment";

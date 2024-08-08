@@ -49,6 +49,7 @@ public class AdminDeleteAnyCommentOperationProcessor extends BaseOperationProces
                     log.info("Start adminDeleteAnyComment input: {}", input);
 
                     Optional<Comment> commentOptional = commentsRepository.findByCommentId(UUID.fromString(input.getCommentId()));
+                    throwIfCommentDoesntExist(commentOptional);
 
                     commentsRepository.delete(commentOptional.get());
 

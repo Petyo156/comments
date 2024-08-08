@@ -30,23 +30,24 @@
 	<properties>
 		<java.version>21</java.version>
 		<revision>0.0.1-SNAPSHOT</revision>
-		<swagger.version>2.6.0</swagger.version>
+		<swaggerversion>2.6.0</swaggerversion>
 		<jakartaversion>3.1.0</jakartaversion>
-		<jackson.data.format.version>2.17.2</jackson.data.format.version>
-		<flatten.maven.version>1.2.7</flatten.maven.version>
+		<jacksondataformatversion>2.17.2</jacksondataformatversion>
+		<flattenmavenversion>1.2.7</flattenmavenversion>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>jakarta.validation</groupId>
-			<artifactId>jakarta.validation-api</artifactId>
-			<version>${jakartaversion}</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>jakarta.validation</groupId>-->
+<!--			<artifactId>jakarta.validation-api</artifactId>-->
+<!--			<version>${jakartaversion}</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -55,51 +56,18 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-yaml</artifactId>
-			<version>${jackson.data.format.version}</version>
+			<version>${jacksondataformatversion}</version>
 		</dependency>
 
-<!--		databases-->
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.7.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-			<version>3.3.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.7.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.java-json-tools</groupId>
-			<artifactId>json-patch</artifactId>
-			<version>1.13</version>
-		</dependency>
 		<dependency>
 			<groupId>io.vavr</groupId>
 			<artifactId>vavr</artifactId>
 			<version>0.10.4</version>
 		</dependency>
 
-<!--		feign-->
+<!--		feign domain?-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -122,7 +90,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>flatten-maven-plugin</artifactId>
-				<version>${flatten.maven.version}</version> <!-- Use the latest version -->
+				<version>${flattenmavenversion}</version> <!-- Use the latest version -->
 				<executions>
 					<execution>
 						<goals>

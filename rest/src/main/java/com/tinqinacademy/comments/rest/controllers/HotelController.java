@@ -1,7 +1,7 @@
 package com.tinqinacademy.comments.rest.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tinqinacademy.comments.api.apimapping.RestApiMapping;
+import com.tinqinacademy.comments.api.apimapping.RestApiMappingComments;
 import com.tinqinacademy.comments.api.operations.hotel.getcommentsforroom.GetCommentsForRoomInput;
 import com.tinqinacademy.comments.api.operations.hotel.leavecommentforroom.LeaveCommentForRoomInput;
 import com.tinqinacademy.comments.api.operations.hotel.usereditowncomment.UserEditOwnCommentInput;
@@ -34,39 +34,39 @@ public class HotelController extends BaseController {
         this.userEditOwnCommentOperationProcessor = userEditOwnCommentOperationProcessor;
     }
 
-    @GetMapping(RestApiMapping.GET_PATH)
+    @GetMapping(RestApiMappingComments.GET_PATH)
     public ResponseEntity<?> getRoomComments(
             @PathVariable("roomId") String roomId) {
 
-        GetCommentsForRoomInput input1 = GetCommentsForRoomInput.builder()
+        GetCommentsForRoomInput getCommentsForRoomInput = GetCommentsForRoomInput.builder()
                 .roomId(roomId)
                 .build();
 
-        return handleOperation(getCommentsForRoomOperationProcessor.process(input1), HttpStatus.BAD_REQUEST);
+        return handleOperation(getCommentsForRoomOperationProcessor.process(getCommentsForRoomInput), HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping(RestApiMapping.POST_PATH)
+    @PostMapping(RestApiMappingComments.POST_PATH)
     public ResponseEntity<?> leaveCommentForRoom(
             @Valid @RequestBody LeaveCommentForRoomInput input,
             @PathVariable("roomId") String roomId) {
 
-        LeaveCommentForRoomInput input1 = input.toBuilder()
+        LeaveCommentForRoomInput leaveCommentForRoomInput = input.toBuilder()
                 .roomId(roomId)
                 .build();
 
-        return handleOperation(leaveCommentForRoomOperationProcessor.process(input1), HttpStatus.BAD_REQUEST);
+        return handleOperation(leaveCommentForRoomOperationProcessor.process(leaveCommentForRoomInput), HttpStatus.BAD_REQUEST);
     }
 
-    @PatchMapping(RestApiMapping.PATCH_PATH)
+    @PatchMapping(RestApiMappingComments.PATCH_PATH)
     public ResponseEntity<?> userEditOwnComment(
             @Valid @RequestBody UserEditOwnCommentInput input,
             @PathVariable("commentId") String commentId) {
 
-        UserEditOwnCommentInput input1 = input.toBuilder()
+        UserEditOwnCommentInput userEditOwnCommentInput = input.toBuilder()
                 .commentId(commentId)
                 .build();
 
-        return handleOperation(userEditOwnCommentOperationProcessor.process(input1), HttpStatus.BAD_REQUEST);
+        return handleOperation(userEditOwnCommentOperationProcessor.process(userEditOwnCommentInput), HttpStatus.BAD_REQUEST);
     }
 
 }

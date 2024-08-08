@@ -1,11 +1,14 @@
 package com.tinqinacademy.comments.core.processors.hotel;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatchException;
+import com.github.fge.jsonpatch.mergepatch.JsonMergePatch;
 import com.tinqinacademy.comments.api.exceptions.Errors;
-import com.tinqinacademy.comments.api.operations.hotel.leavecommentforroom.LeaveCommentForRoomInput;
-import com.tinqinacademy.comments.api.operations.hotel.leavecommentforroom.LeaveCommentForRoomOutput;
 import com.tinqinacademy.comments.api.operations.hotel.usereditowncomment.UserEditOwnCommentInput;
 import com.tinqinacademy.comments.api.operations.hotel.usereditowncomment.UserEditOwnCommentOperation;
 import com.tinqinacademy.comments.api.operations.hotel.usereditowncomment.UserEditOwnCommentOutput;
+import com.tinqinacademy.comments.api.operations.system.admineditanycomment.AdminEditAnyCommentOutput;
 import com.tinqinacademy.comments.core.errorhandling.ErrorMapper;
 import com.tinqinacademy.comments.core.processors.BaseOperationProcessor;
 import com.tinqinacademy.comments.persistence.entities.Comment;
@@ -19,8 +22,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,11 +34,13 @@ import static io.vavr.Predicates.instanceOf;
 public class UserEditOwnCommentOperationProcessor extends BaseOperationProcessor implements UserEditOwnCommentOperation {
 
     private final CommentsRepository commentsRepository;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public UserEditOwnCommentOperationProcessor(ConversionService conversionService, ErrorMapper errorMapper, Validator validator, CommentsRepository commentsRepository) {
+    public UserEditOwnCommentOperationProcessor(ConversionService conversionService, ErrorMapper errorMapper, Validator validator, CommentsRepository commentsRepository, ObjectMapper objectMapper) {
         super(conversionService, errorMapper, validator);
         this.commentsRepository = commentsRepository;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -52,19 +56,28 @@ public class UserEditOwnCommentOperationProcessor extends BaseOperationProcessor
                     Optional<Comment> commentOptional = commentsRepository.findByCommentId(UUID.fromString(input.getCommentId()));
                     throwIfCommentDoesntExist(commentOptional);
 
-                    Comment comment = commentOptional.get().toBuilder()
-                            .content(input.getContent())
-                            .lastEditDate(LocalDate.now())
-                            .build();
+                    Comment comment = commentOptional.get();
 
-                    Comment save = commentsRepository.save(comment);
+                    JsonNode commentNode = objectMapper.valueToTree(comment);
 
-                    UserEditOwnCommentOutput output = UserEditOwnCommentOutput.builder()
-                            .id(String.valueOf(save.getCommentId()))
-                            .build();
+                    JsonNode inputNode = objectMapper.valueToTree(input);
 
-                    log.info("End userCanEditOwnComment output: {}", output);
-                    return output;
+                    try {
+                        JsonMergePatch patch = JsonMergePatch.fromJson(inputNode);
+                        JsonNode patchedNode = patch.apply(commentNode);
+
+                        Comment patchedComment = objectMapper.treeToValue(patchedNode, Comment.class);
+
+                        Comment save = commentsRepository.save(patchedComment);
+
+                        UserEditOwnCommentOutput output = UserEditOwnCommentOutput.builder()
+                                .id(String.valueOf(save.getCommentId()))
+                                .build();
+
+                        return output;
+                    } catch (JsonPatchException | IOException e) {
+                        throw new RuntimeException("Failed to apply patch to comment: " + e.getMessage(), e);
+                    }
                 })
                 .toEither()
                 .mapLeft(throwable -> Match(throwable).of(

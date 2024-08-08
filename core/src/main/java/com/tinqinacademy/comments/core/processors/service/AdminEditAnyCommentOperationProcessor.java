@@ -1,9 +1,10 @@
 package com.tinqinacademy.comments.core.processors.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatchException;
+import com.github.fge.jsonpatch.mergepatch.JsonMergePatch;
 import com.tinqinacademy.comments.api.exceptions.Errors;
-import com.tinqinacademy.comments.api.operations.system.admindeleteanycomment.AdminDeleteAnyCommentInput;
-import com.tinqinacademy.comments.api.operations.system.admindeleteanycomment.AdminDeleteAnyCommentOperation;
-import com.tinqinacademy.comments.api.operations.system.admindeleteanycomment.AdminDeleteAnyCommentOutput;
 import com.tinqinacademy.comments.api.operations.system.admineditanycomment.AdminEditAnyCommentInput;
 import com.tinqinacademy.comments.api.operations.system.admineditanycomment.AdminEditAnyCommentOperation;
 import com.tinqinacademy.comments.api.operations.system.admineditanycomment.AdminEditAnyCommentOutput;
@@ -20,6 +21,8 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -31,11 +34,13 @@ import static io.vavr.Predicates.instanceOf;
 public class AdminEditAnyCommentOperationProcessor extends BaseOperationProcessor implements AdminEditAnyCommentOperation {
 
     private final CommentsRepository commentsRepository;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public AdminEditAnyCommentOperationProcessor(ConversionService conversionService, ErrorMapper errorMapper, Validator validator, CommentsRepository commentsRepository) {
+    public AdminEditAnyCommentOperationProcessor(ConversionService conversionService, ErrorMapper errorMapper, Validator validator, CommentsRepository commentsRepository, ObjectMapper objectMapper) {
         super(conversionService, errorMapper, validator);
         this.commentsRepository = commentsRepository;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -54,14 +59,14 @@ public class AdminEditAnyCommentOperationProcessor extends BaseOperationProcesso
                     Comment comment = commentOptional.get().toBuilder()
                             .firstName(input.getFirstName())
                             .lastName(input.getLastName())
+                            .lastEditDate(LocalDate.now())
                             .content(input.getContent())
-                            //.roomNo?
                             .build();
 
                     commentsRepository.save(comment);
 
                     AdminEditAnyCommentOutput output = AdminEditAnyCommentOutput.builder()
-                            .id(input.getCommentId())
+                            .id(comment.getCommentId().toString())
                             .build();
 
                     log.info("End adminEditAnyComment output: {}", output);

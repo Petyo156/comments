@@ -1,7 +1,7 @@
 package com.tinqinacademy.comments.rest.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tinqinacademy.comments.api.apimapping.RestApiMapping;
+import com.tinqinacademy.comments.api.apimapping.RestApiMappingComments;
 import com.tinqinacademy.comments.api.operations.system.admindeleteanycomment.AdminDeleteAnyCommentInput;
 import com.tinqinacademy.comments.api.operations.system.admineditanycomment.AdminEditAnyCommentInput;
 import com.tinqinacademy.comments.core.processors.service.AdminDeleteAnyCommentOperationProcessor;
@@ -29,27 +29,27 @@ public class SystemController extends BaseController {
         this.objectMapper = objectMapper;
     }
 
-    @PutMapping(RestApiMapping.PUT_PATH)
+    @PutMapping(RestApiMappingComments.PUT_PATH)
     public ResponseEntity<?> adminEditAnyComment(
             @Valid @RequestBody AdminEditAnyCommentInput input,
             @PathVariable("commentId") String commentId) {
 
-        AdminEditAnyCommentInput input1 = input.toBuilder()
+        AdminEditAnyCommentInput adminEditAnyCommentInput = input.toBuilder()
                 .commentId(commentId)
                 .build();
 
-        return handleOperation(adminEditAnyCommentOperationProcessor.process(input1), HttpStatus.BAD_REQUEST);
+        return handleOperation(adminEditAnyCommentOperationProcessor.process(adminEditAnyCommentInput), HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping(RestApiMapping.DELETE_PATH)
+    @DeleteMapping(RestApiMappingComments.DELETE_PATH)
     public ResponseEntity<?> adminDeleteAnyComment(
             @Valid @RequestBody AdminDeleteAnyCommentInput input,
             @PathVariable("commentId") String commentId) {
 
-        AdminDeleteAnyCommentInput input1 = input.toBuilder()
+        AdminDeleteAnyCommentInput adminDeleteAnyCommentInput = input.toBuilder()
                 .commentId(commentId)
                 .build();
 
-        return handleOperation(adminDeleteAnyCommentOperationProcessor.process(input1), HttpStatus.BAD_REQUEST);
+        return handleOperation(adminDeleteAnyCommentOperationProcessor.process(adminDeleteAnyCommentInput), HttpStatus.BAD_REQUEST);
     }
 }

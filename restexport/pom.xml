@@ -13,7 +13,6 @@
     <version>${revision}</version>
     <name>restexport</name>
 
-
     <dependencies>
         <dependency>
             <groupId>com.tinqinacademy.comments</groupId>

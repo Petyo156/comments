@@ -15,12 +15,23 @@
 
 
     <dependencies>
+
         <dependency>
-            <groupId>com.tinqinacademy.comments</groupId>
-            <artifactId>domain</artifactId>
-            <version>${revision}</version>
-            <scope>compile</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+        <!--		databases-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.3</version>
+        </dependency>
+        		<dependency>
+        			<groupId>org.springframework.boot</groupId>
+        			<artifactId>spring-boot-starter-jdbc</artifactId>
+        			<version>3.3.1</version>
+        		</dependency>
     </dependencies>
 
 

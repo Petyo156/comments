@@ -43,10 +43,6 @@ public class LeaveCommentForRoomOperationProcessor extends BaseOperationProcesso
         return Try.of(() -> {
                     log.info("Start leaveCommentForRoom input: {}", input);
 
-                    List<Comment> commentList = commentsRepository.findByRoomId(UUID.fromString(input.getRoomId()));
-
-                    throwIfCommentsForRoomDontExist(commentList);
-
                     Comment comment = conversionService.convert(input, Comment.CommentBuilder.class)
                             .build();
 
